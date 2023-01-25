@@ -1,23 +1,22 @@
-pipeline { 
-     agent { docker { image 'maven:3.8.7-eclipse-temurin-11' } }
+pipeline {
 
-    stages { 
-        
-        stage('Build') { 
-           steps {
-                sh 'mvn clean install'
+agent any
+
+    stages{
+
+            stage('clean the code ')
+            {
+                steps{
+                    sh 'mvn clean'
+                }
             }
-        }
-        
-         stage('Test') {
-            steps {
-                echo 'Testing..'
+
+            stage('unit testing')
+            {
+                steps{
+                    sh 'mvn test'
+                }
             }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+          
     }
 }
